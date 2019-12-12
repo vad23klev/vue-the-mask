@@ -1,5 +1,5 @@
 <template>
-<input type="text" v-mask="config" :value="display" @input="onInput" />
+<input type="text" v-mask="config" :value="display" @input="onInput" @blur="onBlur" />
 </template>
 
 <script>
@@ -54,6 +54,9 @@ export default {
     onInput (e) {
       if (e.isTrusted) return // ignore native event
       this.refresh(e.target.value)
+    },
+    onBlur (e) {
+      this.$emit('blur', e);
     },
 
     refresh (value) {
